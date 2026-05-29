@@ -12,10 +12,16 @@ test('adds and lists appointments', () => {
 test('add requires id, start, and end fields', () => {
   const store = createCalendarStore();
 
-  assert.throws(() => store.add({ id: 'a1' }), {
-    name: 'TypeError',
-    message: 'appointment must include id, start, and end'
-  });
+  for (const appointment of [
+    { start: 100, end: 130 },
+    { id: 'a1', end: 130 },
+    { id: 'a1', start: 100 }
+  ]) {
+    assert.throws(() => store.add(appointment), {
+      name: 'TypeError',
+      message: 'appointment must include id, start, and end'
+    });
+  }
 });
 
 test('moves appointment by id (drag-and-drop primitive)', () => {
@@ -30,6 +36,15 @@ test('move returns null when id is not found', () => {
   const store = createCalendarStore();
 
   assert.equal(store.move('missing', { start: 200 }), null);
+});
+
+test('move preserves required fields', () => {
+  const store = createCalendarStore([{ id: 'a1', start: 100, end: 130 }]);
+
+  assert.throws(() => store.move('a1', { id: undefined }), {
+    name: 'TypeError',
+    message: 'appointment must include id, start, and end'
+  });
 });
 
 test('removes appointments', () => {

@@ -1,3 +1,15 @@
+function hasRequiredFields(appointment) {
+  return (
+    appointment &&
+    appointment.id !== undefined &&
+    appointment.id !== null &&
+    appointment.start !== undefined &&
+    appointment.start !== null &&
+    appointment.end !== undefined &&
+    appointment.end !== null
+  );
+}
+
 function createCalendarStore(initialAppointments = []) {
   const items = [...initialAppointments];
 
@@ -6,7 +18,7 @@ function createCalendarStore(initialAppointments = []) {
   }
 
   function add(appointment) {
-    if (!appointment || appointment.id == null || appointment.start == null || appointment.end == null) {
+    if (!hasRequiredFields(appointment)) {
       throw new TypeError('appointment must include id, start, and end');
     }
 
@@ -19,6 +31,10 @@ function createCalendarStore(initialAppointments = []) {
     if (index === -1) return null;
 
     const next = { ...items[index], ...updates };
+    if (!hasRequiredFields(next)) {
+      throw new TypeError('appointment must include id, start, and end');
+    }
+
     items[index] = next;
     return next;
   }
