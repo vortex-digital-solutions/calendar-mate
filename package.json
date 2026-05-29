@@ -1,0 +1,14 @@
+{
+  "name": "calendar-mate",
+  "version": "0.1.0",
+  "description": "Tiny framework-agnostic calendar core for scheduling",
+  "type": "commonjs",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "license": "MIT"
+}
