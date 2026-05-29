@@ -6,6 +6,10 @@ function createCalendarStore(initialAppointments = []) {
   }
 
   function add(appointment) {
+    if (!appointment || appointment.id == null || appointment.start == null || appointment.end == null) {
+      throw new TypeError('appointment must include id, start, and end');
+    }
+
     items.push(appointment);
     return appointment;
   }
