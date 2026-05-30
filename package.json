@@ -1,0 +1,89 @@
+{
+  "name": "calendar-mate",
+  "version": "0.0.0",
+  "description": "An ultra-light, framework-agnostic drag-and-drop calendar with a native React binding.",
+  "keywords": [
+    "calendar",
+    "drag-and-drop",
+    "scheduling",
+    "appointments",
+    "react",
+    "typescript",
+    "lightweight",
+    "headless"
+  ],
+  "license": "MIT",
+  "author": "Vortex <admin@vortexconfig.com>",
+  "homepage": "https://github.com/sdavisde/calendar-mate#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sdavisde/calendar-mate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sdavisde/calendar-mate/issues"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "packageManager": "pnpm@11.5.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.js",
+      "require": "./dist/react.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "size": "size-limit",
+    "size:why": "size-limit --why",
+    "prepublishOnly": "pnpm build"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^11.1.6",
+    "@types/react": "^19.0.0",
+    "react": "^19.0.0",
+    "size-limit": "^11.1.6",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2"
+  },
+  "size-limit": [
+    {
+      "name": "core (esm, gzip)",
+      "path": "dist/index.js",
+      "limit": "1 kB"
+    },
+    {
+      "name": "react binding (esm, gzip)",
+      "path": "dist/react.js",
+      "limit": "1.5 kB",
+      "ignore": [
+        "react"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+# pnpm 11 reads build-script allowlists from here (no longer from package.json).
+# esbuild ships a native binary via a postinstall script; tsup/size-limit need it.
+allowBuilds:
+  esbuild: true
